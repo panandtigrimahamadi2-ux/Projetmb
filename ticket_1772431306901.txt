@@ -1,0 +1,6 @@
+=========== TICKET DE RAVITAILLEMENT ===========
+Frigo       : null
+Boisson     : null
+Quantité    : 0
+Date        : 2026-03-02T06:01:35.159583700
+=================================================

@@ -1,0 +1,5 @@
+=== SAUVEGARDE DU FRIGO "Frigo1" ===
+Date : 2026-03-04T09:55:30.687294300
+
+Boisson : Flag | Quantité : 24
+Boisson : Coca | Quantité : 24
