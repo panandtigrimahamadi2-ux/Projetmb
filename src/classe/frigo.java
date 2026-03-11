@@ -48,17 +48,20 @@ private JCheckBox chk1;
 public static void actualiserBoissonsDuFrigo(String idFrigo, DefaultTableModel tm) {
     try {
         Connection c = connexionbd.seconnecter();
-        String sql = "SELECT boisson, nombre FROM frigo WHERE idFrigo = ?";
+        String sql = "SELECT b.nom AS boisson, bf.stock " +
+                     "FROM boisson_frigo bf " +
+                     "JOIN boisson b ON bf.id_boisson = b.id " +
+                     "WHERE bf.id_frigo = ?";
         PreparedStatement ps = (PreparedStatement) c.prepareStatement(sql);
         ps.setString(1, idFrigo);
         ResultSet rs = ps.executeQuery();
 
-        tm.setRowCount(0); // Vider le tableau avant de le remplir
+        tm.setRowCount(0);
         int i = 1;
         while (rs.next()) {
-            String boisson = rs.getString("boisson");
-            int nombre = rs.getInt("nombre");
-            tm.addRow(new Object[]{i++, boisson, nombre});
+            String nomBoisson = rs.getString("boisson");
+            int stock = rs.getInt("stock");
+            tm.addRow(new Object[]{i++, nomBoisson, stock});
         }
 
         rs.close();
@@ -68,6 +71,9 @@ public static void actualiserBoissonsDuFrigo(String idFrigo, DefaultTableModel t
         Logger.getLogger(frigo.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
+
+
+
 
  public static void ravitaillerDepuisStock(String idFrigo, int idBoisson, int quantite) {
         try {
@@ -119,55 +125,7 @@ public static void actualiserBoissonsDuFrigo(String idFrigo, DefaultTableModel t
         }
     }
 
-//public static void ravitaillerDepuisStock(String idFrigo, int idBoisson, int quantite) {
-//    try {
-//        Connection c = connexionbd.seconnecter();
-//
-//        // 1. Décrémenter le stock global
-//        String sqlUpdateBoisson = "UPDATE boisson SET stock = stock - ? WHERE id = ?";
-//        PreparedStatement ps1 = (PreparedStatement) c.prepareStatement(sqlUpdateBoisson);
-//        ps1.setInt(1, quantite);
-//        ps1.setInt(2, idBoisson);
-//        ps1.executeUpdate();
-//        ps1.close();
-//
-//        // 2. Vérifier si la boisson existe déjà dans ce frigo
-//        String sqlCheck = "SELECT stock FROM boisson_frigo WHERE id_frigo = ? AND id_boisson = ?";
-//        PreparedStatement ps2 = (PreparedStatement) c.prepareStatement(sqlCheck);
-//        ps2.setString(1, idFrigo);
-//        ps2.setInt(2, idBoisson);
-//        ResultSet rs = ps2.executeQuery();
-//
-//        if (rs.next()) {
-//            // 3a. Si elle existe → UPDATE
-//            String sqlUpdateFrigo = "UPDATE boisson_frigo SET stock = stock + ? WHERE id_frigo = ? AND id_boisson = ?";
-//            PreparedStatement ps3 = (PreparedStatement) c.prepareStatement(sqlUpdateFrigo);
-//            ps3.setInt(1, quantite);
-//            ps3.setString(2, idFrigo);
-//            ps3.setInt(3, idBoisson);
-//            ps3.executeUpdate();
-//            ps3.close();
-//        } else {
-//            // 3b. Si elle n’existe pas → INSERT
-//            String sqlInsertFrigo = "INSERT INTO boisson_frigo (id_frigo, id_boisson, stock) VALUES (?, ?, ?)";
-//            PreparedStatement ps4 = (PreparedStatement) c.prepareStatement(sqlInsertFrigo);
-//            ps4.setString(1, idFrigo);
-//            ps4.setInt(2, idBoisson);
-//            ps4.setInt(3, quantite);
-//            ps4.executeUpdate();
-//            ps4.close();
-//        }
-//
-//        rs.close();
-//        ps2.close();
-//        c.close();
-//
-//        JOptionPane.showMessageDialog(null, "Ravitaillement effectué avec succès !");
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        JOptionPane.showMessageDialog(null, "Erreur lors du ravitaillement !");
-//    }
-//}
+
 public static void ravitailler(String idFrigo, String boisson, int nombre) throws SQLException {
     try {
         Connection c = connexionbd.seconnecter();
@@ -289,23 +247,7 @@ public static void sauvegarderAvantSuppression(String idFrigo, String nomFrigo) 
         }
     }
 
-//public static void viderFrigo(String idFrigo) {
-//    try {
-//        Connection c = connexionbd.seconnecter();
-//        String sql = "DELETE FROM frigo WHERE idFrigo = ?";
-//        PreparedStatement ps = (PreparedStatement) c.prepareStatement(sql);
-//        ps.setString(1, idFrigo);
-//        int lignesSupprimees = ps.executeUpdate();
-//
-//        ps.close();
-//        c.close();
-//
-//        JOptionPane.showMessageDialog(null, lignesSupprimees + " boisson(s) supprimée(s) du frigo.");
-//    } catch (ClassNotFoundException | SQLException ex) {
-//        Logger.getLogger(frigo.class.getName()).log(Level.SEVERE, null, ex);
-//        JOptionPane.showMessageDialog(null, "Erreur lors de la suppression des boissons.");
-//    }
-//}
+
 public static void chargerFrigosDansCombo(JComboBox<String> combo) {
     combo.removeAllItems();
     try {
@@ -314,7 +256,7 @@ public static void chargerFrigosDansCombo(JComboBox<String> combo) {
         PreparedStatement ps = (PreparedStatement) c.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            String item = rs.getString("idFrigo") + " - " + rs.getString("nom_frigo");
+            String item =  rs.getString("nom_frigo");
             combo.addItem(item);
         }
         rs.close();
@@ -323,31 +265,7 @@ public static void chargerFrigosDansCombo(JComboBox<String> combo) {
     } catch (Exception ex) {
         Logger.getLogger(frigo.class.getName()).log(Level.SEVERE, null, ex);
     }
-}// public static void chargerFrigosDansComboBox(JComboBox<String> cbofrigo) {
-//        try {
-//            Connection c = connexionbd.seconnecter();
-//            String sql = "SELECT idFrigo, nom_frigo FROM frigo";
-//            PreparedStatement ps = (PreparedStatement) c.prepareStatement(sql);
-//            ResultSet rs = ps.executeQuery();
-//
-//            cbofrigo.removeAllItems();
-//
-//            while (rs.next()) {
-//                String idFrigo = rs.getString("idFrigo");
-//                String nomFrigo = rs.getString("nom_frigo");
-//                cbofrigo.addItem(idFrigo + " - " + nomFrigo);
-//            }
-//
-//            rs.close();
-//            ps.close();
-//            c.close();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(null, "Erreur lors du chargement du frigo !");
-//        }
-//    }
-
+}
 
 public static java.util.List<BoissonItem> getBoissonsParFrigo(String idFrigo) {
     java.util.List<BoissonItem> boissons = new java.util.ArrayList<>();
@@ -380,165 +298,93 @@ public static java.util.List<BoissonItem> getBoissonsParFrigo(String idFrigo) {
 }
 
 // Méthode qui remplit directement un DefaultTableModel
+
 public static void chargerBoissonsDansTable(String idFrigo, JTable tabBoissons) {
-        try {
-            Connection c = connexionbd.seconnecter();
-            String sql = "SELECT b.nom, bf.stock " +
-                         "FROM boisson_frigo bf " +
-                         "JOIN boisson b ON bf.id_boisson = b.id " +
-                         "WHERE bf.id_frigo = ?";
-            PreparedStatement ps = (PreparedStatement) c.prepareStatement(sql);
-            ps.setString(1, idFrigo);
-            ResultSet rs = ps.executeQuery();
+    try {
+        Connection c = connexionbd.seconnecter();
+        String sql = "SELECT b.nom, bf.stock " +
+                     "FROM boisson_frigo bf " +
+                     "JOIN boisson b ON bf.id_boisson = b.id " +
+                     "WHERE bf.id_frigo = ?";
+        PreparedStatement ps = (PreparedStatement) c.prepareStatement(sql);
+        ps.setString(1, idFrigo);
+        ResultSet rs = ps.executeQuery();
 
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("Boisson");
-            model.addColumn("Stock");
+        // Récupérer le modèle déjà initialisé
+        DefaultTableModel model = (DefaultTableModel) tabBoissons.getModel();
+        model.setRowCount(0); // vider les anciennes lignes
 
-            while (rs.next()) {
-                String nomBoisson = rs.getString("nom");
-                int stock = rs.getInt("stock");
-                model.addRow(new Object[]{nomBoisson, stock});
-            }
-
-            tabBoissons.setModel(model);
-
-            rs.close();
-            ps.close();
-            c.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erreur lors du chargement des boissons !");
+        int i = 1;
+        while (rs.next()) {
+            String nomBoisson = rs.getString("nom");
+            int stock = rs.getInt("stock");
+            model.addRow(new Object[]{i++, nomBoisson, stock});
         }
+
+        rs.close();
+        ps.close();
+        c.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Erreur lors du chargement des boissons !");
     }
+}
 
-//public static void chargerBoissonsDansTable(String idFrigo, JTable tabBoissons) {
-//    try {
-//        Connection c = connexionbd.seconnecter();
-//
-//        // Requête pour récupérer les boissons d'un frigo
-//        String sql = "SELECT b.nom, bf.stock " +
-//                     "FROM boisson_frigo bf " +
-//                     "JOIN boisson b ON bf.id_boisson = b.id " +
-//                     "WHERE bf.id_frigo = ?";
-//        PreparedStatement ps = (PreparedStatement) c.prepareStatement(sql);
-//        ps.setString(1, idFrigo);
-//        ResultSet rs = ps.executeQuery();
-//
-//        // Préparer le modèle du tableau
-//        DefaultTableModel model = new DefaultTableModel();
-//        model.addColumn("Boisson");
-//        model.addColumn("Stock");
-//
-//        // Remplir le tableau avec les résultats
-//        while (rs.next()) {
-//            String nomBoisson = rs.getString("nom");
-//            int stock = rs.getInt("stock");
-//            model.addRow(new Object[]{nomBoisson, stock});
-//        }
-//
-//        // Appliquer le modèle au JTable
-//        tabBoissons.setModel(model);
-//
-//        rs.close();
-//        ps.close();
-//        c.close();
-//
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        JOptionPane.showMessageDialog(null, "Erreur lors du chargement des boissons !");
-//    }
-//}
-    public static void ravitaillerDepuisStock(String idFrigo, String nomBoisson, int quantite) {
-        try {
-            Connection c = connexionbd.seconnecter();
 
-            // Décrémenter le stock global
-            String sqlUpdateBoisson = "UPDATE boisson SET stock = stock - ? WHERE nom = ?";
-            PreparedStatement ps1 = (PreparedStatement) c.prepareStatement(sqlUpdateBoisson);
-            ps1.setInt(1, quantite);
-            ps1.setString(2, nomBoisson);
-            ps1.executeUpdate();
-            ps1.close();
 
-            // Vérifier si la boisson existe déjà dans ce frigo
-            String sqlCheck = "SELECT stock FROM boisson_frigo WHERE id_frigo = ? AND id_boisson = " +
-                              "(SELECT id FROM boisson WHERE nom = ?)";
-            PreparedStatement ps2 = (PreparedStatement) c.prepareStatement(sqlCheck);
-            ps2.setString(1, idFrigo);
-            ps2.setString(2, nomBoisson);
-            ResultSet rs = ps2.executeQuery();
 
-            if (rs.next()) {
-                // Si elle existe → UPDATE
-                String sqlUpdateFrigo = "UPDATE boisson_frigo SET stock = stock + ? " +
-                                        "WHERE id_frigo = ? AND id_boisson = (SELECT id FROM boisson WHERE nom = ?)";
-                PreparedStatement ps3 = (PreparedStatement) c.prepareStatement(sqlUpdateFrigo);
-                ps3.setInt(1, quantite);
-                ps3.setString(2, idFrigo);
-                ps3.setString(3, nomBoisson);
-                ps3.executeUpdate();
-                ps3.close();
-            } else {
-                // Si elle n’existe pas → INSERT
-                String sqlInsertFrigo = "INSERT INTO boisson_frigo (id_frigo, id_boisson, stock) " +
-                                        "VALUES (?, (SELECT id FROM boisson WHERE nom = ?), ?)";
-                PreparedStatement ps4 = (PreparedStatement) c.prepareStatement(sqlInsertFrigo);
-                ps4.setString(1, idFrigo);
-                ps4.setString(2, nomBoisson);
-                ps4.setInt(3, quantite);
-                ps4.executeUpdate();
-                ps4.close();
-            }
+public static void ravitaillerDepuisStock(String idFrigo, String nomBoisson, int quantite) {
+    try {
+        Connection c = connexionbd.seconnecter();
 
-            rs.close();
-            ps2.close();
-            c.close();
+        PreparedStatement ps1 = (PreparedStatement) c.prepareStatement(
+            "UPDATE boisson SET stock = stock - ? WHERE nom = ?"
+        );
+        ps1.setInt(1, quantite);
+        ps1.setString(2, nomBoisson);
+        ps1.executeUpdate();
+        ps1.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erreur lors du ravitaillement !");
+        PreparedStatement ps2 = (PreparedStatement) c.prepareStatement(
+            "SELECT stock FROM boisson_frigo WHERE id_frigo = ? AND id_boisson = (SELECT id FROM boisson WHERE nom = ?)"
+        );
+        ps2.setString(1, idFrigo);
+        ps2.setString(2, nomBoisson);
+        ResultSet rs = ps2.executeQuery();
+
+        if (rs.next()) {
+            PreparedStatement ps3 = (PreparedStatement) c.prepareStatement(
+                "UPDATE boisson_frigo SET stock = stock + ? WHERE id_frigo = ? AND id_boisson = (SELECT id FROM boisson WHERE nom = ?)"
+            );
+            ps3.setInt(1, quantite);
+            ps3.setString(2, idFrigo);
+            ps3.setString(3, nomBoisson);
+            ps3.executeUpdate();
+            ps3.close();
+        } else {
+            PreparedStatement ps4 = (PreparedStatement) c.prepareStatement(
+                "INSERT INTO boisson_frigo (id_frigo, id_boisson, stock) VALUES (?, (SELECT id FROM boisson WHERE nom = ?), ?)"
+            );
+            ps4.setString(1, idFrigo);
+            ps4.setString(2, nomBoisson);
+            ps4.setInt(3, quantite);
+            ps4.executeUpdate();
+            ps4.close();
         }
+
+        rs.close();
+        ps2.close();
+        c.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Erreur lors du ravitaillement !");
     }
+}
+
+
     
-//public void chargerBoissonsDuFrigo(String idFrigo) {
-//    try {
-//        Connection c = connexionbd.seconnecter();
-//
-//        String sql = "SELECT b.nom, bf.stock " +
-//                     "FROM boisson_frigo bf " +
-//                     "JOIN boisson b ON bf.id_boisson = b.id " +
-//                     "WHERE bf.id_frigo = ?";
-//
-//        PreparedStatement ps = (PreparedStatement) c.prepareStatement(sql);
-//        ps.setString(1, idFrigo);
-//
-//        ResultSet rs = ps.executeQuery();
-//
-//        DefaultTableModel model = new DefaultTableModel();
-//        model.addColumn("Boisson");
-//        model.addColumn("Stock");
-//
-//        while (rs.next()) {
-//
-//            String nomBoisson = rs.getString("nom");
-//            int stock = rs.getInt("stock");
-//
-//            model.addRow(new Object[]{nomBoisson, stock});
-//        }
-//
-//        tablistboisson.setModel(model);
-//
-//        rs.close();
-//        ps.close();
-//        c.close();
-//
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        JOptionPane.showMessageDialog(null, "Erreur lors du chargement des boissons du frigo !");
-//    }
-//}
+
     public static void supprimerBoisson(String idFrigo, int idBoisson) {
 
         try {
@@ -578,4 +424,36 @@ public static void chargerBoissonsDansTable(String idFrigo, JTable tabBoissons) 
     c.close();
     return id;
 }
+    
+public static String getIdFrigoParNom(String nomFrigo) throws SQLException, ClassNotFoundException {
+    String idFrigo = null;
+    Connection c = connexionbd.seconnecter();
+    PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT idFrigo FROM frigo WHERE TRIM(LOWER(nom_frigo)) = TRIM(LOWER(?))");
+    ps.setString(1, nomFrigo);
+    ResultSet rs = ps.executeQuery();
+
+    if (rs.next()) {
+        idFrigo = rs.getString("idFrigo");
+    }
+
+    rs.close();
+    ps.close();
+    c.close();
+    return idFrigo;
+}
+
+
+public static void initialiserTableauBoissons(JTable tabBoissons) {
+    DefaultTableModel model = new DefaultTableModel(
+        new Object[]{"N°", "Boisson", "Stock"}, 0
+    ) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // toutes les cellules non éditables
+        }
+    };
+
+    tabBoissons.setModel(model);
+}
+
 }

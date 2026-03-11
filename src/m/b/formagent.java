@@ -61,6 +61,7 @@ cmbtypesalaire.setSelectedIndex(-1);
         tabagent = new javax.swing.JTable();
         btnimprimer = new javax.swing.JButton();
         btnsupprimer = new javax.swing.JButton();
+        btnreinitialiser = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -128,6 +129,15 @@ cmbtypesalaire.setSelectedIndex(-1);
             }
         });
 
+        btnreinitialiser.setBackground(new java.awt.Color(0, 153, 102));
+        btnreinitialiser.setForeground(new java.awt.Color(255, 255, 255));
+        btnreinitialiser.setText("Reinitialiser");
+        btnreinitialiser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreinitialiserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -137,11 +147,13 @@ cmbtypesalaire.setSelectedIndex(-1);
                 .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(133, 133, 133)
+                .addGap(81, 81, 81)
                 .addComponent(btnimprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(103, 103, 103)
+                .addComponent(btnreinitialiser)
+                .addGap(102, 102, 102)
                 .addComponent(btnsupprimer)
-                .addGap(125, 125, 125))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(215, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,7 +169,8 @@ cmbtypesalaire.setSelectedIndex(-1);
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnimprimer)
-                    .addComponent(btnsupprimer))
+                    .addComponent(btnsupprimer)
+                    .addComponent(btnreinitialiser))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -618,49 +631,6 @@ private int getIdAgentParNom(String nom) {
     } catch (SQLException ex) {
         Logger.getLogger(formagent.class.getName()).log(Level.SEVERE, null, ex);
     }
-//    btnsupprimer.setEnabled(false);
-//    btnmodifier.setEnabled(false);
-//    btnvalider.setEnabled(false);
-//    btnimprimer.setEnabled(true);
-//    tabagent.setEnabled(true);
-//    txtnom.setEnabled(false);
-//    ddate.setEnabled(false);
-//    cmbprofil.setEnabled(false);
-//    cmbtypesalaire.setEnabled(false);
-//    btnnouveau.setEnabled(true);
-//    if (!verifierChampsObligatoires()) {
-//    return;
-//}
-// if (idAgentSelectionne == -1) {
-//        JOptionPane.showMessageDialog(this, "Veuillez sélectionner un agent à modifier.");
-//        return;
-//    }
-//
-//    String nom = txtnom.getText().trim();
-//    java.sql.Date dateNaissance = new java.sql.Date(ddate.getDate().getTime());
-//    String profil = cmbprofil.getSelectedItem().toString(); // ✅ ajout de la ligne manquante
-//    String typeSalaire = cmbtypesalaire.getSelectedItem().toString();
-//    double salaire = 0;
-//    double prixParBouteille = 0;
-//
-//    try {
-//        if ("par mois".equalsIgnoreCase(typeSalaire)) {
-//            salaire = Double.parseDouble(txtsalaire.getText().trim());
-//        } else {
-//            prixParBouteille = Double.parseDouble(txtprixbouteille.getText().trim());
-//        }
-//
-//        agent.modifier(idAgentSelectionne, nom, dateNaissance, profil, typeSalaire, salaire, prixParBouteille);
-//        JOptionPane.showMessageDialog(this, "Agent modifié !");
-//        chargerListeAgents();
-//        btnnouveau.doClick();
-//    } catch (NumberFormatException e) {
-//        JOptionPane.showMessageDialog(this, "Montants invalides.");
-//    }   catch (SQLException ex) {
-//            Logger.getLogger(formagent.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
-
     }//GEN-LAST:event_btnmodifierActionPerformed
 
     private void btnsupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsupprimerActionPerformed
@@ -711,6 +681,33 @@ private int getIdAgentParNom(String nom) {
         evt.consume();
     }     
     }//GEN-LAST:event_txtsalaireKeyTyped
+
+    private void btnreinitialiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreinitialiserActionPerformed
+        // TODO add your handling code here:
+    int confirmation = JOptionPane.showConfirmDialog(this,
+        "Voulez-vous vraiment réinitialiser nb_bouteilles et salaire pour les agents de profil serveur(se) ?",
+        "Confirmation",
+        JOptionPane.YES_NO_OPTION);
+
+    if (confirmation == JOptionPane.YES_OPTION) {
+        try {
+            Connection c = (Connection) connexionbd.seconnecter();
+            // ✅ On cible exactement 'serveur(se)' en ignorant la casse et les espaces
+            String sql = "UPDATE agent SET nb_bouteilles = 0, salaire = 0 WHERE TRIM(LOWER(profil)) = 'serveur(se)'";
+            PreparedStatement ps = (PreparedStatement) c.prepareStatement(sql);
+            int lignesModifiees = ps.executeUpdate();
+
+            ps.close();
+            c.close();
+
+            JOptionPane.showMessageDialog(this, lignesModifiees + " agent(s) serveur(se) réinitialisé(s) avec succès.");
+            chargerListeAgents();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erreur lors de la réinitialisation.");
+        }
+    }
+    }//GEN-LAST:event_btnreinitialiserActionPerformed
 
     private void chargerListeAgents() throws SQLException {
     DefaultTableModel model = (DefaultTableModel) tabagent.getModel();
@@ -777,6 +774,7 @@ private int getIdAgentParNom(String nom) {
     private javax.swing.JButton btnimprimer;
     private javax.swing.JButton btnmodifier;
     private javax.swing.JButton btnnouveau;
+    private javax.swing.JButton btnreinitialiser;
     private javax.swing.JButton btnsupprimer;
     private javax.swing.JButton btnvalider;
     private javax.swing.JComboBox<String> cmbprofil;

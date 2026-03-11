@@ -62,17 +62,7 @@ public class commande {
     }
     return -1; // ⚡ si aucun agent trouvé
 }
-//    // Récupérer l’ID d’un agent par son nom
-//    public static int getIdAgent(String nom) throws SQLException, ClassNotFoundException {
-//        Connection c = (Connection) connexionbd.seconnecter();
-//        PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT id FROM agent WHERE nom = ?");
-//        ps.setString(1, nom);
-//        ResultSet rs = ps.executeQuery();
-//        if (rs.next()) {
-//            return rs.getInt("id");
-//        }
-//        return -1;
-//    }
+
 
     // Ajouter une commande
     public static void ajouterCommande(String idCommande, int idAgent, String idCaisse, String serveur, boolean payer, double total) throws SQLException, ClassNotFoundException {
@@ -337,16 +327,7 @@ public static void updateStatutCommande(String idCommande, boolean payer) throws
     c.close();
 }
 
-//public static void updateStatutCommande(String idCommande, boolean payer) throws SQLException, ClassNotFoundException {
-//    Connection c = (Connection) connexionbd.seconnecter();
-//    String nouveauStatut = payer ? "PAYÉ" : "EN COURS";
-//    PreparedStatement ps = (PreparedStatement) c.prepareStatement("UPDATE commande SET statut=? WHERE id_commande=?");
-//    ps.setString(1, nouveauStatut);
-//    ps.setString(2, idCommande);
-//    ps.executeUpdate();
-//    ps.close(); c.close();
-//}
-// Vérifier si une commande existe
+
 public static boolean commandeExiste(String idCommande) throws SQLException, ClassNotFoundException {
     Connection c = (Connection) connexionbd.seconnecter();
     PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT id_commande FROM commande WHERE id_commande=?");

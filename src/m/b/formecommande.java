@@ -60,6 +60,9 @@ public class formecommande extends javax.swing.JPanel {
 
     }
     
+
+
+    
     private void chargerFrigos() {
     try {
         cbofrigo.removeAllItems();
@@ -652,154 +655,6 @@ cmbboisson.setEnabled(true);
         JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout de la boisson.");
     }
         
-////    try {
-////        Connection c = (Connection) connexionbd.seconnecter();
-////
-////        // Extraire ID frigo
-////        String frigoItem = cbofrigo.getSelectedItem().toString();
-////        String idFrigo = frigoItem.split(" - ")[0];
-////
-////        // Extraire nom boisson (sécurisé)
-////        String boissonItem = cmbboisson.getSelectedItem().toString();
-////        String boissonNom;
-////        int idx = boissonItem.indexOf("(");
-////        if (idx != -1) {
-////            boissonNom = boissonItem.substring(0, idx).trim();
-////        } else {
-////            boissonNom = boissonItem.trim();
-////        }
-////
-////        int quantite = Integer.parseInt(txtnombre.getText());
-////
-////        // Vérifier stock disponible
-////        PreparedStatement psStock = (PreparedStatement) c.prepareStatement(
-////            "SELECT bf.stock, b.id FROM boisson_frigo bf JOIN boisson b ON b.id = bf.id_boisson WHERE bf.id_frigo = ? AND b.nom = ?"
-////        );
-////        psStock.setString(1, idFrigo);
-////        psStock.setString(2, boissonNom);
-////        ResultSet rs = psStock.executeQuery();
-////
-////        if (rs.next()) {
-////            int stock = rs.getInt("stock");
-////            int idBoisson = rs.getInt("id");
-////
-////            if (stock < quantite) {
-////                JOptionPane.showMessageDialog(this, "Stock insuffisant !");
-////                return;
-////            }
-////
-////            // Décrémenter le stock
-////            PreparedStatement psUpdate = (PreparedStatement) c.prepareStatement(
-////                "UPDATE boisson_frigo SET stock = stock - ? WHERE id_frigo = ? AND id_boisson = ?"
-////            );
-////            psUpdate.setInt(1, quantite);
-////            psUpdate.setString(2, idFrigo);
-////            psUpdate.setInt(3, idBoisson);
-////            psUpdate.executeUpdate();
-////
-////            // Récupérer prix unitaire
-////            double prixUnitaire = commande.getPrixBoisson(boissonNom);
-////            double prixTotal = prixUnitaire * quantite;
-////
-////            // Ajouter la ligne dans le tableau (4 colonnes)
-////            DefaultTableModel model = (DefaultTableModel) tabcommande.getModel();
-////            model.addRow(new Object[]{boissonNom, prixUnitaire, quantite, prixTotal});
-////
-////            // Recalculer le total cumulé
-////            double total = 0;
-////            for (int i = 0; i < model.getRowCount(); i++) {
-////                total += Double.parseDouble(model.getValueAt(i, 3).toString());
-////            }
-////            txttotal.setText(total + " FCFA");
-////
-////            // ✅ Incrémenter nb_bouteilles de l’agent choisi
-////            String nomServeur = cmbserveur.getSelectedItem().toString();
-////            int idAgent = commande.getIdAgent(nomServeur);
-////
-////            PreparedStatement psAgentUpdate = (PreparedStatement) c.prepareStatement(
-////                "UPDATE agent SET nb_bouteilles = nb_bouteilles + ? WHERE id = ?"
-////            );
-////            psAgentUpdate.setInt(1, quantite); // quantité saisie
-////            psAgentUpdate.setInt(2, idAgent);
-////            psAgentUpdate.executeUpdate();
-////        }
-////
-////        rs.close();
-////        psStock.close();
-////        c.close();
-////    } catch (Exception e) {
-////        e.printStackTrace();
-////        JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout de la boisson.");
-////    }
-
-//    try {
-//        Connection c = (Connection) connexionbd.seconnecter();
-//
-//        // Extraire ID frigo
-//        String frigoItem = cbofrigo.getSelectedItem().toString();
-//        String idFrigo = frigoItem.split(" - ")[0];
-//
-//        // Extraire nom boisson (sécurisé)
-//        String boissonItem = cmbboisson.getSelectedItem().toString();
-//        String boissonNom;
-//        int idx = boissonItem.indexOf("(");
-//        if (idx != -1) {
-//            boissonNom = boissonItem.substring(0, idx).trim();
-//        } else {
-//            boissonNom = boissonItem.trim();
-//        }
-//
-//        int quantite = Integer.parseInt(txtnombre.getText());
-//
-//        // Vérifier stock disponible
-//        PreparedStatement psStock = (PreparedStatement) c.prepareStatement(
-//            "SELECT bf.stock, b.id FROM boisson_frigo bf JOIN boisson b ON b.id = bf.id_boisson WHERE bf.id_frigo = ? AND b.nom = ?"
-//        );
-//        psStock.setString(1, idFrigo);
-//        psStock.setString(2, boissonNom);
-//        ResultSet rs = psStock.executeQuery();
-//
-//        if (rs.next()) {
-//            int stock = rs.getInt("stock");
-//            int idBoisson = rs.getInt("id");
-//
-//            if (stock < quantite) {
-//                JOptionPane.showMessageDialog(this, "Stock insuffisant !");
-//                return;
-//            }
-//
-//            // Décrémenter le stock
-//            PreparedStatement psUpdate = (PreparedStatement) c.prepareStatement(
-//                "UPDATE boisson_frigo SET stock = stock - ? WHERE id_frigo = ? AND id_boisson = ?"
-//            );
-//            psUpdate.setInt(1, quantite);
-//            psUpdate.setString(2, idFrigo);
-//            psUpdate.setInt(3, idBoisson);
-//            psUpdate.executeUpdate();
-//
-//            // Récupérer prix unitaire
-//            double prixUnitaire = commande.getPrixBoisson(boissonNom);
-//            double prixTotal = prixUnitaire * quantite;
-//
-//            // Ajouter la ligne dans le tableau (4 colonnes)
-//            DefaultTableModel model = (DefaultTableModel) tabcommande.getModel();
-//            model.addRow(new Object[]{boissonNom, prixUnitaire, quantite, prixTotal});
-//
-//            // Recalculer le total cumulé
-//            double total = 0;
-//            for (int i = 0; i < model.getRowCount(); i++) {
-//                total += Double.parseDouble(model.getValueAt(i, 3).toString());
-//            }
-//            txttotal.setText(total + " FCFA");
-//        }
-//
-//        rs.close();
-//        psStock.close();
-//        c.close();
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout de la boisson.");
-//    }
     }//GEN-LAST:event_btnajouterActionPerformed
 
      
@@ -848,14 +703,17 @@ cmbboisson.setEnabled(true);
     }//GEN-LAST:event_btnlistcommandeActionPerformed
 
     private void cbofrigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbofrigoActionPerformed
+
     try {
         if (cbofrigo.getSelectedItem() != null) {
             String frigoSelectionne = cbofrigo.getSelectedItem().toString();
-            String idFrigo = frigoSelectionne.split(" - ")[0]; // récupère l’ID
+
+            // ✅ Récupérer l'ID du frigo par son nom
+            String idFrigo = frigo.getIdFrigoParNom(frigoSelectionne);
 
             cmbboisson.removeAllItems();
 
-            // Utiliser la méthode utilitaire
+            // ✅ Utiliser la méthode utilitaire pour récupérer les boissons
             ResultSet rs = commande.getBoissonsParFrigo(idFrigo);
 
             while (rs.next()) {
@@ -872,6 +730,8 @@ cmbboisson.setEnabled(true);
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, "Erreur lors du chargement des boissons.");
     }
+        
+
 
     }//GEN-LAST:event_cbofrigoActionPerformed
 
@@ -949,96 +809,6 @@ cmbboisson.setEnabled(true);
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, "Erreur lors de l'enregistrement.");
     }
-
-
-
-
-//   try {
-//        // Générer l'ID de commande
-//        String idCommande = commande.genererIdCommande();
-//
-//        // Récupérer le serveur sélectionné
-//        String serveur = (cmbserveur.getSelectedItem() != null) 
-//            ? cmbserveur.getSelectedItem().toString() 
-//            : "Serveur inconnu";
-//
-//        // Récupérer l'ID agent
-//        int idAgent = commande.getIdAgent(serveur);
-//
-//        // Récupérer l'ID caisse ouverte
-//        String idCaisse = commande.getIdCaisseOuverte();
-//
-//        // Statut payé ou non
-//        boolean payer = chpayer.isSelected();
-//
-//        // Total en double
-//        double total = Double.parseDouble(txttotal.getText().replace("FCFA", "").trim());
-//
-//        // Récupérer le modèle du tableau
-//        DefaultTableModel model = (DefaultTableModel) tabcommande.getModel();
-//
-//        // ⚡ Appel correct
-//        commande.enregistrerCommande(idCommande, idAgent, idCaisse, serveur, payer, total, model);
-//
-//        JOptionPane.showMessageDialog(this, "Commande enregistrée avec succès !");
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        JOptionPane.showMessageDialog(this, "Erreur lors de l'enregistrement.");
-//    }
-//try {
-//        int ligne = tabcommande.getSelectedRow();
-//        if (ligne == -1) {
-//            JOptionPane.showMessageDialog(this, "Veuillez sélectionner une commande.");
-//            return;
-//        }
-//
-//        // ⚡ Récupérer l'ID de la commande sélectionnée
-//        String idCommande = tabcommande.getValueAt(ligne, 0).toString(); // suppose que la 1ère colonne contient l'id_commande
-//        boolean payer = chpayer.isSelected();
-//
-//        // ⚡ Mise à jour du statut
-//        commande.updateStatutCommande(idCommande, payer);
-//
-//        JOptionPane.showMessageDialog(this, "Statut de la commande mis à jour !");
-//        commande.chargerListeCommandes(tabcommande);// ⚡ recharge ton tableau pour voir le nouveau statut
-//
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        JOptionPane.showMessageDialog(this, "Erreur lors de la mise à jour du statut.");
-//    }
-// try {
-//        int ligne = tabcommande.getSelectedRow();
-//        boolean payer = chpayer.isSelected();
-//
-//        String idCommande;
-//        if (ligne != -1) {
-//            // ⚡ Si une commande est sélectionnée → utiliser son ID
-//            idCommande = tabcommande.getValueAt(ligne, 0).toString();
-//        } else {
-//            // ⚡ Sinon → générer un nouvel ID
-//            idCommande = commande.genererIdCommande();
-//        }
-//
-//        String serveur = (cmbserveur.getSelectedItem() != null) 
-//            ? cmbserveur.getSelectedItem().toString() 
-//            : "Serveur inconnu";
-//        int idAgent = commande.getIdAgent(serveur);
-//        String idCaisse = commande.getIdCaisseOuverte();
-//        double total = Double.parseDouble(txttotal.getText().replace("FCFA", "").trim());
-//        DefaultTableModel model = (DefaultTableModel) tabcommande.getModel();
-//
-//        // ⚡ Appel unique
-//        commande.validerOuInsererCommande(idCommande, idAgent, idCaisse, serveur, payer, total, model);
-//
-//        JOptionPane.showMessageDialog(this, "Commande validée !");
-//        commande.chargerListeCommandes(tabcommande);
-//
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        JOptionPane.showMessageDialog(this, "Erreur lors de la validation.");
-//    }
-
-
 
     }//GEN-LAST:event_btnvaliderActionPerformed
 

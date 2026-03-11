@@ -40,6 +40,8 @@ public class formfrigo extends javax.swing.JPanel {
         initComponents();
 //        btnnouveau.setEnabled(false); // désactivé au démarrage
         chargerFrigosDansCombo(cbofrigo);
+        frigo.initialiserTableauBoissons(tablistboisson);
+
     }
 private void formWindowOpened(java.awt.event.WindowEvent evt) {
     frigo.chargerFrigosDansCombo(cbofrigo);
@@ -424,7 +426,6 @@ if (nomFrigo != null) {
     }//GEN-LAST:event_btnnouveauActionPerformed
 
     private void btnravitaillerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnravitaillerActionPerformed
-  
     btnravitailler.setEnabled(false);
     btnreinitialiser.setEnabled(true);
     txtnombre.setEnabled(true);
@@ -437,23 +438,32 @@ if (nomFrigo != null) {
     btnnouveau.setEnabled(true);
     cmbboisson.setEnabled(false);
 
+    Connection c = null;
     try {
         String nomBoisson = cmbboisson.getSelectedItem().toString();
         int nombres = Integer.parseInt(txtnombre.getText().trim());
 
-        int multiplicateur = ch24.isSelected() ? 24 :
-                             ch12.isSelected() ? 12 :
-                             ch6.isSelected() ? 6 : 1;
+        // ✅ Calcul du multiplicateur selon la caisse cochée
+        int multiplicateur = 1;
+        if (ch24.isSelected()) multiplicateur = 24;
+        else if (ch12.isSelected()) multiplicateur = 12;
+        else if (ch6.isSelected()) multiplicateur = 6;
+        else if (ch1.isSelected()) multiplicateur = 1;
 
         int quantiteDemandee = nombres * multiplicateur;
 
-        String frigoSelectionne = cbofrigo.getSelectedItem().toString();
-        String idFrigo = frigoSelectionne.split(" - ")[0];
+        String nomFrigo = cbofrigo.getSelectedItem().toString();
+        String idFrigo = frigo.getIdFrigoParNom(nomFrigo);
 
-        Connection c = (Connection) connexionbd.seconnecter();
+        if (idFrigo == null) {
+            JOptionPane.showMessageDialog(this, "Frigo introuvable !");
+            return;
+        }
+
+        c = (Connection) connexionbd.seconnecter();
         c.setAutoCommit(false);
 
-        // Vérifier stock disponible
+        // ✅ Vérifier stock disponible dans la table stock
         PreparedStatement psStock = (PreparedStatement) c.prepareStatement("SELECT nombre FROM stock WHERE boisson = ?");
         psStock.setString(1, nomBoisson);
         ResultSet rsStock = psStock.executeQuery();
@@ -461,42 +471,80 @@ if (nomFrigo != null) {
         if (rsStock.next()) {
             int disponible = rsStock.getInt("nombre");
             if (disponible < quantiteDemandee) {
-                JOptionPane.showMessageDialog(this, "Stock insuffisant !");
+                JOptionPane.showMessageDialog(this, "Stock insuffisant !\nDisponible : " + disponible + "\nDemandé : " + quantiteDemandee);
                 c.rollback();
-                c.close();
                 return;
             }
         } else {
             JOptionPane.showMessageDialog(this, "Boisson introuvable dans le stock !");
             c.rollback();
-            c.close();
             return;
         }
+        rsStock.close();
+        psStock.close();
 
-        // Déduire du stock
+        // ✅ Déduire du stock global
         PreparedStatement psUpdateStock = (PreparedStatement) c.prepareStatement("UPDATE stock SET nombre = nombre - ? WHERE boisson = ?");
         psUpdateStock.setInt(1, quantiteDemandee);
         psUpdateStock.setString(2, nomBoisson);
         psUpdateStock.executeUpdate();
+        psUpdateStock.close();
 
-        // Ajouter au frigo
-        PreparedStatement psUpdateFrigo = (PreparedStatement) c.prepareStatement(
-            "UPDATE boisson_frigo SET stock = stock + ? WHERE id_frigo = ? AND id_boisson = (SELECT id FROM boisson WHERE nom = ?)"
+        // ✅ Vérifier si la boisson existe déjà dans le frigo
+        PreparedStatement psCheck = (PreparedStatement) c.prepareStatement(
+            "SELECT stock FROM boisson_frigo WHERE id_frigo = ? AND id_boisson = (SELECT id FROM boisson WHERE nom = ?)"
         );
-        psUpdateFrigo.setInt(1, quantiteDemandee);
-        psUpdateFrigo.setString(2, idFrigo);
-        psUpdateFrigo.setString(3, nomBoisson);
-        psUpdateFrigo.executeUpdate();
+        psCheck.setString(1, idFrigo);
+        psCheck.setString(2, nomBoisson);
+        ResultSet rsCheck = psCheck.executeQuery();
+
+        if (rsCheck.next()) {
+            PreparedStatement psUpdateFrigo = (PreparedStatement) c.prepareStatement(
+                "UPDATE boisson_frigo SET stock = stock + ? WHERE id_frigo = ? AND id_boisson = (SELECT id FROM boisson WHERE nom = ?)"
+            );
+            psUpdateFrigo.setInt(1, quantiteDemandee);
+            psUpdateFrigo.setString(2, idFrigo);
+            psUpdateFrigo.setString(3, nomBoisson);
+            psUpdateFrigo.executeUpdate();
+            psUpdateFrigo.close();
+        } else {
+            PreparedStatement psInsertFrigo = (PreparedStatement) c.prepareStatement(
+                "INSERT INTO boisson_frigo (id_frigo, id_boisson, stock) VALUES (?, (SELECT id FROM boisson WHERE nom = ?), ?)"
+            );
+            psInsertFrigo.setString(1, idFrigo);
+            psInsertFrigo.setString(2, nomBoisson);
+            psInsertFrigo.setInt(3, quantiteDemandee);
+            psInsertFrigo.executeUpdate();
+            psInsertFrigo.close();
+        }
+
+        rsCheck.close();
+        psCheck.close();
 
         c.commit();
         c.close();
 
-        chargerBoissonsDuFrigo(idFrigo);
+        // ✅ Rafraîchir le tableau
+        frigo.chargerBoissonsDansTable(idFrigo, tablistboisson);
+
         JOptionPane.showMessageDialog(this, "Ravitaillement effectué !");
     } catch (Exception e) {
+        try {
+            if (c != null) c.rollback();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, "Erreur lors du ravitaillement : " + e.getMessage());
+    } finally {
+        try {
+            if (c != null) c.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
+
+
 
 
     }//GEN-LAST:event_btnravitaillerActionPerformed
@@ -650,90 +698,94 @@ public void chargerBoissonsDuFrigo(String idFrigo) {
 }
     private void cbofrigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbofrigoFocusGained
          // Désactiver certains boutons/champs
-    btnravitailler.setEnabled(false);
-    btnreinitialiser.setEnabled(true);
-    txtnombre.setEnabled(false);
-    ch1.setEnabled(false);
-    ch12.setEnabled(false);
-    ch24.setEnabled(false);
-    ch6.setEnabled(false);
-    btnactualiser.setEnabled(true);
-    btnimprimer.setEnabled(true);
-    btnnouveau.setEnabled(true);
-    cmbboisson.setEnabled(false);
-
+         btnnouveau.setEnabled(true);
+          btnactualiser.setEnabled(true);
+           btnimprimer.setEnabled(true);
+            btnreinitialiser.setEnabled(true);
+         
     try {
         Connection c = (Connection) connexionbd.seconnecter();
         Statement st = (Statement) c.createStatement();
 
-        // ✅ Charger depuis la vraie table frigo
-        ResultSet rs = (ResultSet) st.executeQuery("SELECT idFrigo, nom_frigo FROM frigo ORDER BY idFrigo");
+        // Charger les noms des frigos
+        ResultSet rs = st.executeQuery("SELECT nom_frigo FROM frigo ORDER BY nom_frigo");
 
-        // Vider la liste avant de recharger
         cbofrigo.removeAllItems();
-        // Ajouter chaque frigo dans la liste déroulante
         while (rs.next()) {
-            String item = rs.getString("idFrigo") + " - " + rs.getString("nom_frigo");
-            cbofrigo.addItem(item);
+            cbofrigo.addItem(rs.getString("nom_frigo"));
         }
 
         rs.close();
         st.close();
         c.close();
 
-    } catch (ClassNotFoundException | SQLException ex) {
-        Logger.getLogger(formcreefrigo.class.getName()).log(Level.SEVERE, null, ex);
-    }
-                                 
+        // ✅ Si un frigo est sélectionné après le remplissage, charger ses boissons
+        if (cbofrigo.getSelectedItem() != null) {
+            String nomFrigo = cbofrigo.getSelectedItem().toString();
+            String idFrigo = frigo.getIdFrigoParNom(nomFrigo);
 
-//private void cbofrigoActionPerformed(java.awt.event.ActionEvent evt) {                                         
-//    if (cbofrigo.getSelectedItem() != null) {
+            if (idFrigo != null) {
+                frigo.chargerBoissonsDansTable(idFrigo, tablistboisson);
+            } else {
+                JOptionPane.showMessageDialog(this, "Frigo introuvable !");
+            }
+        }
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Erreur lors du chargement des frigos.");
+    }
+     
+
+    }//GEN-LAST:event_cbofrigoFocusGained
+
+    private void cbofrigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbofrigoActionPerformed
+//
+// if (cbofrigo.getSelectedItem() != null) {
 //        String frigoSelectionne = cbofrigo.getSelectedItem().toString();
 //        String idFrigo = frigoSelectionne.split(" - ")[0]; // ✅ récupère l’ID avant le tiret
 //        frigo.chargerBoissonsDansTable(idFrigo, tablistboisson);
 //    }
-//
-    }//GEN-LAST:event_cbofrigoFocusGained
-
-    private void cbofrigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbofrigoActionPerformed
-        if (cbofrigo.getSelectedItem() != null) {
-        String frigoSelectionne = cbofrigo.getSelectedItem().toString();
-        String idFrigo = frigoSelectionne.split(" - ")[0]; // ✅ récupère l’ID avant le tiret
-        frigo.chargerBoissonsDansTable(idFrigo, tablistboisson);
-    }
-
     }//GEN-LAST:event_cbofrigoActionPerformed
 
     private void btnreinitialiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreinitialiserActionPerformed
         // TODO add your handling code here:
-        String nomFrigo = cbofrigo.getSelectedItem() != null ? cbofrigo.getSelectedItem().toString() : null;
+        
+    String frigoSelectionne = cbofrigo.getSelectedItem() != null ? cbofrigo.getSelectedItem().toString() : null;
 
-if (nomFrigo != null) {
-    int confirmation = JOptionPane.showConfirmDialog(this,
-        "Voulez-vous vraiment supprimer toutes les boissons du frigo \"" + nomFrigo + "\" ?",
-        "Confirmation",
-        JOptionPane.YES_NO_OPTION);
+    if (frigoSelectionne != null) {
+        int confirmation = JOptionPane.showConfirmDialog(this,
+            "Voulez-vous vraiment supprimer toutes les boissons du frigo \"" + frigoSelectionne + "\" ?",
+            "Confirmation",
+            JOptionPane.YES_NO_OPTION);
 
-    if (confirmation == JOptionPane.YES_OPTION) {
-        String identifiant = creefrigo.getIdentifiantParNom(nomFrigo);
-        if (identifiant != null) {
-            // Sauvegarder avant suppression
-            frigo.sauvegarderAvantSuppression(identifiant, nomFrigo);
-            
-            // Supprimer les boissons
-            frigo.viderFrigo(identifiant);
-            
-            // Actualiser le tableau
-            DefaultTableModel tm = (DefaultTableModel) tablistboisson.getModel();
-            tm.setRowCount(0);
-            frigo.actualiserBoissonsDuFrigo(identifiant, tm);
-        } else {
-            JOptionPane.showMessageDialog(this, "Identifiant du frigo introuvable.");
+        if (confirmation == JOptionPane.YES_OPTION) {
+            try {
+                // ✅ Récupérer l'identifiant réel du frigo
+                String idFrigo = frigo.getIdFrigoParNom(frigoSelectionne);
+                
+                if (idFrigo != null) {
+                    frigo.sauvegarderAvantSuppression(idFrigo, frigoSelectionne);
+                    frigo.viderFrigo(idFrigo);
+                    
+                    // ✅ Vider et actualiser le tableau
+                    DefaultTableModel tm = (DefaultTableModel) tablistboisson.getModel();
+                    tm.setRowCount(0);
+                    frigo.chargerBoissonsDansTable(idFrigo, tablistboisson);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Identifiant du frigo introuvable !");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(formfrigo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(formfrigo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Veuillez sélectionner un frigo.");
     }
-} else {
-    JOptionPane.showMessageDialog(this, "Veuillez sélectionner un frigo.");
-}
+
+
     }//GEN-LAST:event_btnreinitialiserActionPerformed
 
     private void cmbboissonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbboissonActionPerformed
