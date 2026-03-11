@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*;
+import static m.b.formconnexion.txtid;
 
 
 /**
@@ -552,6 +553,7 @@ public static String nomuser="";
         fconn.setSize(dbureau.getWidth(),dbureau.getHeight());
         fconn.setVisible(true);
         dbureau.add(fconn);
+        txtid.grabFocus();
         
     }//GEN-LAST:event_mconnecterMouseClicked
 

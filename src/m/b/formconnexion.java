@@ -50,8 +50,8 @@ public class formconnexion extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtid = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtmdp = new javax.swing.JTextField();
         btnseconnecter = new javax.swing.JButton();
+        txtmdp = new javax.swing.JPasswordField();
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
 
@@ -65,12 +65,6 @@ public class formconnexion extends javax.swing.JPanel {
 
         jLabel2.setText("Mot de passe");
 
-        txtmdp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtmdpActionPerformed(evt);
-            }
-        });
-
         btnseconnecter.setBackground(new java.awt.Color(0, 153, 51));
         btnseconnecter.setForeground(new java.awt.Color(255, 255, 255));
         btnseconnecter.setText("Se connecter");
@@ -80,13 +74,19 @@ public class formconnexion extends javax.swing.JPanel {
             }
         });
 
+        txtmdp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmdpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -96,8 +96,8 @@ public class formconnexion extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnseconnecter)
-                            .addComponent(txtmdp, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                            .addComponent(txtmdp))))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,16 +120,16 @@ public class formconnexion extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(218, 218, 218)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addContainerGap(340, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(140, 140, 140)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -146,16 +146,14 @@ public class formconnexion extends javax.swing.JPanel {
 
     private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
         // TODO add your handling code here:
+        txtmdp.grabFocus();
     }//GEN-LAST:event_txtidActionPerformed
-
-    private void txtmdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmdpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtmdpActionPerformed
 
     private void btnseconnecterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnseconnecterActionPerformed
 
     String id = txtid.getText().trim();
-    String pw = txtmdp.getText().trim();
+    char[] motDePasse = txtmdp.getPassword();
+    String pw = new String(motDePasse);
     String pwc = "";
 
     try {
@@ -223,78 +221,13 @@ public class formconnexion extends javax.swing.JPanel {
     }
 
 
-//        // TODO add your handling code here:
-//      // Variables de connexion
-//   
-//
-//        String id = txtid.getText().trim();
-//        String pw = txtmdp.getText().trim();
-//        String pwc = "";
-//
-//        try {
-//            // Connexion
-//            c = connexionbd.seconnecter();
-//
-//            // Cryptage MD5
-//            MessageDigest md = MessageDigest.getInstance("MD5");
-//            md.update(pw.getBytes(), 0, pw.length());
-//            pwc = new BigInteger(1, md.digest()).toString(16);
-//
-//            // Requête sécurisée
-//            String sql = "SELECT u.nom, u.profil, "
-//                       + "p.commande, p.depense, p.frigo, p.boisson, p.caisse, "
-//                       + "p.stock, p.agent, p.statistique, p.parametre "
-//                       + "FROM utilisateur u "
-//                       + "JOIN profil p ON u.profil = p.droit "
-//                       + "WHERE u.identifiant = ? AND u.motdepasse = ?";
-//
-//            ps = c.prepareStatement(sql);
-//            ps.setString(1, id);
-//            ps.setString(2, pwc);
-//
-//            rs = ps.executeQuery();
-//
-//            if (rs.next()) {
-//                // Récupération des infos utilisateur
-//                nomuser = rs.getString("nom");
-//                vcommande = rs.getInt("commande");
-//                vdepense = rs.getInt("depense");
-//                vfrigo = rs.getInt("frigo");
-//                vboisson = rs.getInt("boisson");
-//                vcaisse = rs.getInt("caisse");
-//                vstock = rs.getInt("stock");
-//                vagent = rs.getInt("agent");
-//                vstatistique = rs.getInt("statistique");
-//                vparametre = rs.getInt("parametre");
-//                // Mise à jour de l'interface principale
-//                formmain.lbuser.setText(nomuser);
-//                formmain.magent.setEnabled(true);
-//                formmain.mcommande.setEnabled(true);
-//                formmain.mdepense.setEnabled(true);
-//                formmain.mconnecter.setText("Se connecter");
-//                formmain.mfrigo.setEnabled(true);
-//                formmain.mboisson.setEnabled(true);
-//                formmain.mcaisse.setEnabled(true);
-//                formmain.mstock.setEnabled(true);
-//                formmain.mparamètre.setEnabled(true);
-//                formmain.mstatistique.setEnabled(true);
-//
-//                formmain.dbureau.removeAll();
-//                formmain.dbureau.repaint();
-//
-//                JOptionPane.showMessageDialog(this, "Connexion réussie !");
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Identifiant ou mot de passe incorrect !");
-//            }
-//
-//        } catch (Exception ex) {
-//            Logger.getLogger(formconnexion.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(this, "Erreur lors de la connexion : " + ex.getMessage());
-//        }
-//        
-//        
 
     }//GEN-LAST:event_btnseconnecterActionPerformed
+
+    private void txtmdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmdpActionPerformed
+        // TODO add your handling code here:
+        btnseconnecter.grabFocus();
+    }//GEN-LAST:event_txtmdpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -303,7 +236,7 @@ public class formconnexion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtid;
-    private javax.swing.JTextField txtmdp;
+    public static javax.swing.JTextField txtid;
+    private javax.swing.JPasswordField txtmdp;
     // End of variables declaration//GEN-END:variables
 }

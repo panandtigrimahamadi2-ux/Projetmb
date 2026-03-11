@@ -15,6 +15,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 import java.sql.*;
 import java.util.Date;
@@ -54,7 +55,6 @@ cmbtypesalaire.setSelectedIndex(-1);
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -78,14 +78,13 @@ cmbtypesalaire.setSelectedIndex(-1);
         txtprixbouteille = new javax.swing.JTextField();
         ddate = new com.toedter.calendar.JDateChooser();
         btnmodifier = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
 
-        jLabel2.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
-        jLabel2.setText("                                                         AGENT");
-
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabel4.setText("                              LISTE DES AGENTS");
+        jLabel4.setText("                LISTE DES AGENTS");
 
         tabagent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,16 +134,18 @@ cmbtypesalaire.setSelectedIndex(-1);
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(btnimprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnsupprimer)
                 .addGap(125, 125, 125))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(215, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(156, 156, 156))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +162,7 @@ cmbtypesalaire.setSelectedIndex(-1);
         );
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabel1.setText("                   ENREGISTRER AGENT");
+        jLabel1.setText("                             ENREGISTRER AGENT");
 
         jLabel3.setText("Nom");
 
@@ -181,6 +182,11 @@ cmbtypesalaire.setSelectedIndex(-1);
         jLabel9.setText("Salaire");
 
         txtsalaire.setEnabled(false);
+        txtsalaire.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtsalaireKeyTyped(evt);
+            }
+        });
 
         cmbprofil.setEnabled(false);
 
@@ -213,6 +219,11 @@ cmbtypesalaire.setSelectedIndex(-1);
         jLabel6.setText("Prix/bouteille");
 
         txtprixbouteille.setEnabled(false);
+        txtprixbouteille.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtprixbouteilleKeyTyped(evt);
+            }
+        });
 
         ddate.setEnabled(false);
 
@@ -234,7 +245,7 @@ cmbtypesalaire.setSelectedIndex(-1);
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(btnnouveau, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,15 +264,16 @@ cmbtypesalaire.setSelectedIndex(-1);
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(btnmodifier, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(txtsalaire)
                             .addComponent(txtnom)
                             .addComponent(cmbtypesalaire, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbprofil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtprixbouteille)
-                            .addComponent(ddate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(ddate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(btnmodifier, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -269,7 +281,7 @@ cmbtypesalaire.setSelectedIndex(-1);
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtnom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -302,31 +314,50 @@ cmbtypesalaire.setSelectedIndex(-1);
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(0, 0, 51));
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 3, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("AGENT");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(386, 386, 386)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(16, 16, 16))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 67, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(15, 15, 15)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(283, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(134, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(525, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -403,7 +434,8 @@ if (!verifierChampsObligatoires()) {
         cmbtypesalaire.setEnabled(true);
         txtprixbouteille.setEnabled(true);
         txtsalaire.setEnabled(true);
-        btnmodifier.setEnabled(true);
+        btnmodifier.setEnabled(false);
+        btnsupprimer.setEnabled(false);
         btnnouveau.setEnabled(false);
         btnvalider.setEnabled(true);
         txtnom.setText("");
@@ -530,48 +562,6 @@ private int getIdAgentParNom(String nom) {
     }
 
     idAgentSelectionne = getIdAgentParNom(txtnom.getText().trim());
-        
-//int ligne = tabagent.getSelectedRow();
-//
-//    if (ligne == -1) {
-//        JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne.");
-//        return;
-//    }
-//
-//    btnsupprimer.setEnabled(true);
-//    btnmodifier.setEnabled(true);
-//    btnvalider.setEnabled(false);
-//    btnimprimer.setEnabled(true);
-//    tabagent.setEnabled(true);
-//    txtnom.setEnabled(true);
-//    ddate.setEnabled(true);
-//    cmbprofil.setEnabled(true);
-//    cmbtypesalaire.setEnabled(true);
-//    btnnouveau.setEnabled(true);
-//
-//    txtnom.setText(tabagent.getValueAt(ligne, 0).toString());
-//    ddate.setDate((Date) tabagent.getValueAt(ligne, 1));
-//    cmbprofil.setSelectedItem(tabagent.getValueAt(ligne, 2).toString());
-//    cmbtypesalaire.setSelectedItem(tabagent.getValueAt(ligne, 3).toString());
-//
-//    String typeSalaire = tabagent.getValueAt(ligne, 3).toString();
-//
-//    if ("par mois".equalsIgnoreCase(typeSalaire)) {
-//        txtsalaire.setEnabled(true);
-//        txtprixbouteille.setEnabled(false);
-//        txtsalaire.setText(tabagent.getValueAt(ligne, 5).toString());
-//        txtprixbouteille.setText("");
-//    } else {
-//        txtsalaire.setEnabled(false);
-//        txtprixbouteille.setEnabled(true);
-//        txtsalaire.setText("");
-//        txtprixbouteille.setText(""); // à adapter si tu veux calculer le prix unitaire
-//    }
-//
-//    idAgentSelectionne = getIdAgentParNom(txtnom.getText().trim());
-
-
-
     }//GEN-LAST:event_tabagentMouseClicked
 
     private void btnmodifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodifierActionPerformed
@@ -582,7 +572,6 @@ private int getIdAgentParNom(String nom) {
     btnvalider.setEnabled(false);
     btnimprimer.setEnabled(true);
     tabagent.setEnabled(true);
-
     txtnom.setEnabled(false);
     ddate.setEnabled(false);
     cmbprofil.setEnabled(false);
@@ -622,7 +611,7 @@ private int getIdAgentParNom(String nom) {
         agent.modifier(idAgentSelectionne, nom, dateNaissance, profil, typeSalaire, salaire, prixParBouteille);
         JOptionPane.showMessageDialog(this, "Agent modifié !");
         chargerListeAgents();
-        btnnouveau.doClick();
+//        btnnouveau.doClick();
 
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Montants invalides.");
@@ -700,10 +689,28 @@ private int getIdAgentParNom(String nom) {
              } catch (SQLException ex) {
                  Logger.getLogger(formagent.class.getName()).log(Level.SEVERE, null, ex);
              }
-        btnnouveau.doClick();
+//        btnnouveau.doClick();
     }
 
     }//GEN-LAST:event_btnsupprimerActionPerformed
+
+    private void txtprixbouteilleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprixbouteilleKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SPACE)){
+        getToolkit().beep();
+        evt.consume();
+    }     
+    }//GEN-LAST:event_txtprixbouteilleKeyTyped
+
+    private void txtsalaireKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsalaireKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SPACE)){
+        getToolkit().beep();
+        evt.consume();
+    }     
+    }//GEN-LAST:event_txtsalaireKeyTyped
 
     private void chargerListeAgents() throws SQLException {
     DefaultTableModel model = (DefaultTableModel) tabagent.getModel();
@@ -787,6 +794,7 @@ private int getIdAgentParNom(String nom) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tabagent;
     private javax.swing.JTextField txtnom;

@@ -19,6 +19,7 @@ import java.awt.Graphics2D;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.print.Printable;
 import java.awt.print.PrinterJob;
 import java.util.logging.Level;
@@ -78,7 +79,6 @@ public class formecommande extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -104,13 +104,12 @@ public class formecommande extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         txtAvoir = new javax.swing.JTextField();
         btnlistcommande = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setEnabled(false);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
-
-        jLabel2.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
-        jLabel2.setText("                                                       COMMANDE");
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel4.setText("                     BOISSONS");
@@ -160,9 +159,19 @@ public class formecommande extends javax.swing.JPanel {
         jLabel7.setText("Nombre");
 
         txtnombre.setEnabled(false);
+        txtnombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtnombreMouseClicked(evt);
+            }
+        });
         txtnombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnombreActionPerformed(evt);
+            }
+        });
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
             }
         });
 
@@ -235,7 +244,7 @@ public class formecommande extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cbofrigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(cmbboisson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -303,6 +312,7 @@ public class formecommande extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tabcommande);
 
         btnvalider.setText("Valider");
+        btnvalider.setEnabled(false);
         btnvalider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnvaliderActionPerformed(evt);
@@ -367,7 +377,7 @@ public class formecommande extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtAvoir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(chpayer)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -385,39 +395,57 @@ public class formecommande extends javax.swing.JPanel {
             }
         });
 
+        jPanel4.setBackground(new java.awt.Color(0, 0, 51));
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 3, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("    COMMANDE");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(406, 406, 406)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(22, 22, 22))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(332, 332, 332)
+                        .addComponent(btnlistcommande))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(332, 332, 332)
-                .addComponent(btnlistcommande)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(24, 24, 24)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(50, 50, 50)
                 .addComponent(btnlistcommande)
-                .addGap(592, 592, 592))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -428,7 +456,7 @@ public class formecommande extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -438,7 +466,17 @@ public class formecommande extends javax.swing.JPanel {
 
     private void btnimprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimerActionPerformed
         
-        
+        cmbboisson.setEnabled(false);
+    txtAvoir.setEnabled(false);
+    txtnombre.setEnabled(false);
+    tabcommande.setEnabled(false);
+    btnajouter.setEnabled(false);
+    btnimprimer.setEnabled(false);
+    chpayer.setEnabled(false);
+    btnnouveau.setEnabled(true);
+    cmbserveur.setEnabled(false);
+    cbofrigo.setEnabled(false);
+    btnvalider.setEnabled(false);
 
      try {
         // ⚡ ticket basé sur la dernière commande validée
@@ -474,16 +512,20 @@ public class formecommande extends javax.swing.JPanel {
     private void btnnouveauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnouveauActionPerformed
         // TODO add your handling code here:
         cmbboisson.setEnabled(true);
-    txtAvoir.setEnabled(true);
+    txtAvoir.setEnabled(false);
     txtnombre.setEnabled(true);
     tabcommande.setEnabled(true);
     btnajouter.setEnabled(true);
     btnimprimer.setEnabled(false);
-    chpayer.setEnabled(true);
+    chpayer.setEnabled(false);
     btnnouveau.setEnabled(false);
     cmbserveur.setEnabled(true);
     cbofrigo.setEnabled(true);
     btnvalider.setEnabled(false);
+    
+    // Effacer le tableau
+    DefaultTableModel model = (DefaultTableModel) tabcommande.getModel();
+    model.setRowCount(0);
 
     try {
         Connection c = (Connection) connexionbd.seconnecter();
@@ -535,9 +577,9 @@ cmbboisson.setEnabled(true);
     txtnombre.setEnabled(true);
     tabcommande.setEnabled(true);
     btnajouter.setEnabled(true);
-    btnimprimer.setEnabled(true);
+    btnimprimer.setEnabled(false);
     chpayer.setEnabled(true);
-    btnnouveau.setEnabled(false);
+    btnnouveau.setEnabled(true);
     cmbserveur.setEnabled(true);
     cbofrigo.setEnabled(true);
     btnvalider.setEnabled(true);
@@ -768,6 +810,7 @@ cmbboisson.setEnabled(true);
 
     private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtnombreActionPerformed
 
     private void btnlistcommandeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistcommandeActionPerformed
@@ -838,6 +881,7 @@ cmbboisson.setEnabled(true);
 
     private void cmbboissonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbboissonActionPerformed
         // TODO add your handling code here:
+        txtnombre.grabFocus();
          if (cmbboisson.getSelectedItem() != null) {
         try {
             String nomBoisson = cmbboisson.getSelectedItem().toString();
@@ -1006,13 +1050,26 @@ cmbboisson.setEnabled(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAvoirActionPerformed
 
+    private void txtnombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtnombreMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtnombreMouseClicked
+
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+        // TODO add your handling code here:
+         char c=evt.getKeyChar();
+        if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SPACE)){
+        getToolkit().beep();
+        evt.consume();
+    }//GEN-LAST:event_txtnombreKeyTyped
+    }
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnajouter;
     public static javax.swing.JButton btnimprimer;
     private javax.swing.JButton btnlistcommande;
     private javax.swing.JButton btnnouveau;
-    private javax.swing.JButton btnvalider;
+    public static javax.swing.JButton btnvalider;
     private javax.swing.JComboBox<String> cbofrigo;
     public static javax.swing.JCheckBox chpayer;
     private javax.swing.JComboBox<String> cmbboisson;
@@ -1029,10 +1086,11 @@ cmbboisson.setEnabled(true);
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tabcommande;
-    private javax.swing.JTextField txtAvoir;
+    public static javax.swing.JTextField txtAvoir;
     private javax.swing.JTextField txtnombre;
     public static javax.swing.JTextField txttotal;
     // End of variables declaration//GEN-END:variables

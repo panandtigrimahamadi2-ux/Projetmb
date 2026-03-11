@@ -14,6 +14,7 @@ import classe.stock;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +56,6 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -78,11 +78,10 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
         btnimprimer = new javax.swing.JButton();
         cbofrigo = new javax.swing.JComboBox<>();
         btnreinitialiser = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
-
-        jLabel2.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
-        jLabel2.setText("                                                    FRIGO");
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabel4.setText("                   RAVITAILLEMENT");
@@ -92,6 +91,11 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
         jLabel7.setText("Nombres");
 
         txtnombre.setEnabled(false);
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
+            }
+        });
 
         cmbboisson.setEnabled(false);
         cmbboisson.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -333,31 +337,50 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
                 .addGap(25, 25, 25))
         );
 
+        jPanel4.setBackground(new java.awt.Color(0, 0, 51));
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 3, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("          FRIGO");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(272, 272, 272)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(24, 24, 24))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(23, 23, 23)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -395,40 +418,87 @@ if (nomFrigo != null) {
         ch6.setEnabled(true);
         btnactualiser.setEnabled(false);
         btnimprimer.setEnabled(false);
-        btnnouveau.setEnabled(false);
+        btnnouveau.setEnabled(true);
         cmbboisson.setEnabled(true);
         
     }//GEN-LAST:event_btnnouveauActionPerformed
 
     private void btnravitaillerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnravitaillerActionPerformed
+  
+    btnravitailler.setEnabled(false);
+    btnreinitialiser.setEnabled(true);
+    txtnombre.setEnabled(true);
+    ch1.setEnabled(false);
+    ch12.setEnabled(false);
+    ch24.setEnabled(false);
+    ch6.setEnabled(false);
+    btnactualiser.setEnabled(true);
+    btnimprimer.setEnabled(true);
+    btnnouveau.setEnabled(true);
+    cmbboisson.setEnabled(false);
+
     try {
-        String boisson = cmbboisson.getSelectedItem().toString();
+        String nomBoisson = cmbboisson.getSelectedItem().toString();
         int nombres = Integer.parseInt(txtnombre.getText().trim());
 
         int multiplicateur = ch24.isSelected() ? 24 :
                              ch12.isSelected() ? 12 :
                              ch6.isSelected() ? 6 : 1;
 
-        int nombre = nombres * multiplicateur;
+        int quantiteDemandee = nombres * multiplicateur;
 
-        // ✅ Extraire l’ID du frigo avant le tiret
         String frigoSelectionne = cbofrigo.getSelectedItem().toString();
         String idFrigo = frigoSelectionne.split(" - ")[0];
 
-        // ✅ Récupérer l’ID de la boisson par son nom
-        int idBoisson = getIdBoissonParNom(boisson);
+        Connection c = (Connection) connexionbd.seconnecter();
+        c.setAutoCommit(false);
 
-        // ✅ Appeler la méthode corrigée
-        frigo.ravitaillerDepuisStock(idFrigo, idBoisson, nombre);
+        // Vérifier stock disponible
+        PreparedStatement psStock = (PreparedStatement) c.prepareStatement("SELECT nombre FROM stock WHERE boisson = ?");
+        psStock.setString(1, nomBoisson);
+        ResultSet rsStock = psStock.executeQuery();
 
-        // ✅ Recharger les boissons du frigo
+        if (rsStock.next()) {
+            int disponible = rsStock.getInt("nombre");
+            if (disponible < quantiteDemandee) {
+                JOptionPane.showMessageDialog(this, "Stock insuffisant !");
+                c.rollback();
+                c.close();
+                return;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Boisson introuvable dans le stock !");
+            c.rollback();
+            c.close();
+            return;
+        }
+
+        // Déduire du stock
+        PreparedStatement psUpdateStock = (PreparedStatement) c.prepareStatement("UPDATE stock SET nombre = nombre - ? WHERE boisson = ?");
+        psUpdateStock.setInt(1, quantiteDemandee);
+        psUpdateStock.setString(2, nomBoisson);
+        psUpdateStock.executeUpdate();
+
+        // Ajouter au frigo
+        PreparedStatement psUpdateFrigo = (PreparedStatement) c.prepareStatement(
+            "UPDATE boisson_frigo SET stock = stock + ? WHERE id_frigo = ? AND id_boisson = (SELECT id FROM boisson WHERE nom = ?)"
+        );
+        psUpdateFrigo.setInt(1, quantiteDemandee);
+        psUpdateFrigo.setString(2, idFrigo);
+        psUpdateFrigo.setString(3, nomBoisson);
+        psUpdateFrigo.executeUpdate();
+
+        c.commit();
+        c.close();
+
         chargerBoissonsDuFrigo(idFrigo);
-
         JOptionPane.showMessageDialog(this, "Ravitaillement effectué !");
     } catch (Exception e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors du ravitaillement.");
+        JOptionPane.showMessageDialog(this, "Erreur lors du ravitaillement : " + e.getMessage());
     }
+
+
     }//GEN-LAST:event_btnravitaillerActionPerformed
 
     private void ch24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ch24ActionPerformed
@@ -670,6 +740,15 @@ if (nomFrigo != null) {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbboissonActionPerformed
 
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SPACE)){
+        getToolkit().beep();
+        evt.consume();
+    }     
+    }//GEN-LAST:event_txtnombreKeyTyped
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -694,6 +773,7 @@ if (nomFrigo != null) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tablistboisson;
     private javax.swing.JTextField txtnombre;
