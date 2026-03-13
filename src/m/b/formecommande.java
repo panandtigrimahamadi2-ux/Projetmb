@@ -119,6 +119,7 @@ public class formecommande extends javax.swing.JPanel {
 
         btnnouveau.setBackground(new java.awt.Color(0, 0, 102));
         btnnouveau.setForeground(new java.awt.Color(255, 255, 255));
+        btnnouveau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/nouveau.png"))); // NOI18N
         btnnouveau.setText("Nouveau");
         btnnouveau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +129,7 @@ public class formecommande extends javax.swing.JPanel {
 
         btnajouter.setBackground(new java.awt.Color(255, 102, 0));
         btnajouter.setForeground(new java.awt.Color(255, 255, 255));
+        btnajouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Ajouter.png"))); // NOI18N
         btnajouter.setText("Ajouter");
         btnajouter.setEnabled(false);
         btnajouter.addActionListener(new java.awt.event.ActionListener() {
@@ -142,9 +144,9 @@ public class formecommande extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnnouveau, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addComponent(btnnouveau)
                 .addGap(18, 18, 18)
-                .addComponent(btnajouter, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnajouter, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -218,12 +220,10 @@ public class formecommande extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
@@ -287,6 +287,7 @@ public class formecommande extends javax.swing.JPanel {
 
         btnimprimer.setBackground(new java.awt.Color(204, 0, 0));
         btnimprimer.setForeground(new java.awt.Color(255, 255, 255));
+        btnimprimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
         btnimprimer.setText("Imprimer");
         btnimprimer.setEnabled(false);
         btnimprimer.addActionListener(new java.awt.event.ActionListener() {
@@ -314,6 +315,7 @@ public class formecommande extends javax.swing.JPanel {
         tabcommande.setEnabled(false);
         jScrollPane1.setViewportView(tabcommande);
 
+        btnvalider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/valider.png"))); // NOI18N
         btnvalider.setText("Valider");
         btnvalider.setEnabled(false);
         btnvalider.addActionListener(new java.awt.event.ActionListener() {
@@ -343,10 +345,10 @@ public class formecommande extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(btnvalider)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnimprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnimprimer))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,6 +393,7 @@ public class formecommande extends javax.swing.JPanel {
 
         btnlistcommande.setBackground(new java.awt.Color(0, 0, 0));
         btnlistcommande.setForeground(new java.awt.Color(255, 255, 255));
+        btnlistcommande.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/list.png"))); // NOI18N
         btnlistcommande.setText("Liste commande");
         btnlistcommande.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -448,7 +451,7 @@ public class formecommande extends javax.swing.JPanel {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(50, 50, 50)
                 .addComponent(btnlistcommande)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

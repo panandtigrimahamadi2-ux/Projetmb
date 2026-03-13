@@ -4,6 +4,7 @@
  */
 package m.b;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -23,6 +24,8 @@ public static String nomuser="";
     /**
      * Creates new form formmain
      */
+        
+
     public formmain() {
         initComponents();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -86,7 +89,7 @@ public static String nomuser="";
         mcommande.setBackground(new java.awt.Color(255, 255, 255));
         mcommande.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         mcommande.setForeground(new java.awt.Color(255, 255, 255));
-        mcommande.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/commande_b.png"))); // NOI18N
+        mcommande.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/cammandes.png"))); // NOI18N
         mcommande.setText("Commande");
         mcommande.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mcommande.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -98,6 +101,7 @@ public static String nomuser="";
         mdepense.setBackground(new java.awt.Color(255, 255, 255));
         mdepense.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         mdepense.setForeground(new java.awt.Color(255, 255, 255));
+        mdepense.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/depenses.png"))); // NOI18N
         mdepense.setText("Depenses");
         mdepense.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mdepense.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,6 +113,7 @@ public static String nomuser="";
         mfrigo.setBackground(new java.awt.Color(255, 255, 255));
         mfrigo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         mfrigo.setForeground(new java.awt.Color(255, 255, 255));
+        mfrigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/frigo.png"))); // NOI18N
         mfrigo.setText("Frigo");
         mfrigo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mfrigo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,6 +125,7 @@ public static String nomuser="";
         mcaisse.setBackground(new java.awt.Color(255, 255, 255));
         mcaisse.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         mcaisse.setForeground(new java.awt.Color(255, 255, 255));
+        mcaisse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/caisse.png"))); // NOI18N
         mcaisse.setText("Caisse");
         mcaisse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mcaisse.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,6 +137,7 @@ public static String nomuser="";
         mstock.setBackground(new java.awt.Color(255, 255, 255));
         mstock.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         mstock.setForeground(new java.awt.Color(255, 255, 255));
+        mstock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/stock.png"))); // NOI18N
         mstock.setText("Stock");
         mstock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mstock.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,6 +149,7 @@ public static String nomuser="";
         magent.setBackground(new java.awt.Color(255, 255, 255));
         magent.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         magent.setForeground(new java.awt.Color(255, 255, 255));
+        magent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/agents.png"))); // NOI18N
         magent.setText("Agents");
         magent.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         magent.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,6 +161,7 @@ public static String nomuser="";
         mparamètre.setBackground(new java.awt.Color(255, 255, 255));
         mparamètre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         mparamètre.setForeground(new java.awt.Color(255, 255, 255));
+        mparamètre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/parametre.png"))); // NOI18N
         mparamètre.setText("Paramètres");
         mparamètre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mparamètre.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -164,6 +173,7 @@ public static String nomuser="";
         mstatistique.setBackground(new java.awt.Color(255, 255, 255));
         mstatistique.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         mstatistique.setForeground(new java.awt.Color(255, 255, 255));
+        mstatistique.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/statistique.png"))); // NOI18N
         mstatistique.setText("Statistiques");
         mstatistique.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mstatistique.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,6 +184,7 @@ public static String nomuser="";
 
         mboisson.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         mboisson.setForeground(new java.awt.Color(255, 255, 255));
+        mboisson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/boisson.png"))); // NOI18N
         mboisson.setText("Boisson");
         mboisson.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mboisson.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -182,9 +193,12 @@ public static String nomuser="";
             }
         });
 
+        mconnecter.setBackground(new java.awt.Color(102, 102, 255));
         mconnecter.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         mconnecter.setForeground(new java.awt.Color(255, 255, 255));
+        mconnecter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Seconnecter.png"))); // NOI18N
         mconnecter.setText("Se connecter");
+        mconnecter.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 255), 4, true));
         mconnecter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mconnecter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -201,40 +215,40 @@ public static String nomuser="";
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator2)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator8)
-            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(mcommande, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mdepense, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(mfrigo, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(mboisson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mdepense, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mfrigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(mstatistique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mstatistique, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                         .addGap(51, 51, 51))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(mcaisse, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(magent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                            .addComponent(mstock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                            .addComponent(mcaisse, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(magent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mstock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mparamètre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
+                    .addComponent(mboisson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbuser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mconnecter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lbuser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(mconnecter, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,43 +257,43 @@ public static String nomuser="";
                 .addComponent(mcommande, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mdepense)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mfrigo)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mboisson)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mcaisse)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mstock)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(magent)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mstatistique)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mparamètre)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(mconnecter)
+                .addGap(44, 44, 44)
+                .addComponent(mconnecter, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbuser, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         dbureau.setBackground(new java.awt.Color(102, 102, 255));
@@ -288,11 +302,11 @@ public static String nomuser="";
         dbureau.setLayout(dbureauLayout);
         dbureauLayout.setHorizontalGroup(
             dbureauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 407, Short.MAX_VALUE)
+            .addGap(0, 393, Short.MAX_VALUE)
         );
         dbureauLayout.setVerticalGroup(
             dbureauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 683, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         maccueil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home_32.png"))); // NOI18N
@@ -343,14 +357,6 @@ public static String nomuser="";
         fcom.setSize(dbureau.getWidth(),dbureau.getHeight());
         fcom.setVisible(true);
         dbureau.add(fcom);
-//         formmain.mfrigo.setEnabled(vfri == 1);
-//    formmain.mdepense.setEnabled(vdep == 1);
-//    formmain.mcaisse.setEnabled(vcai == 1);
-//    formmain.mboisson.setEnabled(vboi == 1);
-//    formmain.mstock.setEnabled(vsto == 1);
-//    formmain.magent.setEnabled(vage == 1);
-//    formmain.mstatistique.setEnabled(vsta == 1);
-//    formmain.mparamètre.setEnabled(vpar == 1);
     }//GEN-LAST:event_mcommandeMouseClicked
 
     private void mdepenseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdepenseMouseClicked

@@ -113,6 +113,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
 
         btnravitailler.setBackground(new java.awt.Color(255, 102, 0));
         btnravitailler.setForeground(new java.awt.Color(255, 255, 255));
+        btnravitailler.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ravitailler.png"))); // NOI18N
         btnravitailler.setText("Ravitailler");
         btnravitailler.setEnabled(false);
         btnravitailler.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +124,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
 
         btnnouveau.setBackground(new java.awt.Color(0, 0, 102));
         btnnouveau.setForeground(new java.awt.Color(255, 255, 255));
+        btnnouveau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/nouveau.png"))); // NOI18N
         btnnouveau.setText("Nouveau");
         btnnouveau.setEnabled(false);
         btnnouveau.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +188,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnnouveau)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnravitailler, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnravitailler))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
@@ -256,6 +258,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
 
         btnactualiser.setBackground(new java.awt.Color(204, 153, 0));
         btnactualiser.setForeground(new java.awt.Color(255, 255, 255));
+        btnactualiser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/actualiser.png"))); // NOI18N
         btnactualiser.setText("Actualiser");
         btnactualiser.setEnabled(false);
         btnactualiser.addActionListener(new java.awt.event.ActionListener() {
@@ -268,6 +271,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
 
         btnimprimer.setBackground(new java.awt.Color(0, 0, 0));
         btnimprimer.setForeground(new java.awt.Color(255, 255, 255));
+        btnimprimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
         btnimprimer.setText("Imprimer");
         btnimprimer.setEnabled(false);
         btnimprimer.addActionListener(new java.awt.event.ActionListener() {
@@ -289,6 +293,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
 
         btnreinitialiser.setBackground(new java.awt.Color(153, 0, 0));
         btnreinitialiser.setForeground(new java.awt.Color(255, 255, 255));
+        btnreinitialiser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reinitialiser.png"))); // NOI18N
         btnreinitialiser.setText("Reinitialiser");
         btnreinitialiser.setEnabled(false);
         btnreinitialiser.addActionListener(new java.awt.event.ActionListener() {
@@ -304,7 +309,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnactualiser)
@@ -318,7 +323,7 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cbofrigo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,13 +334,13 @@ private void formWindowOpened(java.awt.event.WindowEvent evt) {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbofrigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnactualiser)
-                    .addComponent(btnimprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnreinitialiser))
+                    .addComponent(btnreinitialiser)
+                    .addComponent(btnimprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
         );
 
