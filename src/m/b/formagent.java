@@ -112,6 +112,7 @@ cmbtypesalaire.setSelectedIndex(-1);
 
         btnimprimer.setBackground(new java.awt.Color(0, 0, 0));
         btnimprimer.setForeground(new java.awt.Color(255, 255, 255));
+        btnimprimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/print.png"))); // NOI18N
         btnimprimer.setText("Imprimer");
         btnimprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +122,7 @@ cmbtypesalaire.setSelectedIndex(-1);
 
         btnsupprimer.setBackground(new java.awt.Color(153, 0, 0));
         btnsupprimer.setForeground(new java.awt.Color(255, 255, 255));
+        btnsupprimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/supprimer_24.png"))); // NOI18N
         btnsupprimer.setText("Supprimer");
         btnsupprimer.setEnabled(false);
         btnsupprimer.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +133,7 @@ cmbtypesalaire.setSelectedIndex(-1);
 
         btnreinitialiser.setBackground(new java.awt.Color(0, 153, 102));
         btnreinitialiser.setForeground(new java.awt.Color(255, 255, 255));
+        btnreinitialiser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/reinitialiser.png"))); // NOI18N
         btnreinitialiser.setText("Reinitialiser");
         btnreinitialiser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,9 +172,9 @@ cmbtypesalaire.setSelectedIndex(-1);
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnimprimer)
-                    .addComponent(btnsupprimer)
-                    .addComponent(btnreinitialiser))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnreinitialiser)
+                    .addComponent(btnsupprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
@@ -212,6 +215,7 @@ cmbtypesalaire.setSelectedIndex(-1);
 
         btnvalider.setBackground(new java.awt.Color(204, 0, 0));
         btnvalider.setForeground(new java.awt.Color(255, 255, 255));
+        btnvalider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/valider.png"))); // NOI18N
         btnvalider.setText("Valider");
         btnvalider.setEnabled(false);
         btnvalider.addActionListener(new java.awt.event.ActionListener() {
@@ -222,6 +226,7 @@ cmbtypesalaire.setSelectedIndex(-1);
 
         btnnouveau.setBackground(new java.awt.Color(0, 153, 0));
         btnnouveau.setForeground(new java.awt.Color(255, 255, 255));
+        btnnouveau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/nouveau.png"))); // NOI18N
         btnnouveau.setText("Nouveau");
         btnnouveau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,6 +247,7 @@ cmbtypesalaire.setSelectedIndex(-1);
 
         btnmodifier.setBackground(new java.awt.Color(204, 102, 0));
         btnmodifier.setForeground(new java.awt.Color(255, 255, 255));
+        btnmodifier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/modi.png"))); // NOI18N
         btnmodifier.setText("Modifier");
         btnmodifier.setEnabled(false);
         btnmodifier.addActionListener(new java.awt.event.ActionListener() {
@@ -261,7 +267,7 @@ cmbtypesalaire.setSelectedIndex(-1);
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(btnnouveau, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnnouveau)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnvalider)
                         .addGap(14, 14, 14))
@@ -282,12 +288,12 @@ cmbtypesalaire.setSelectedIndex(-1);
                             .addComponent(cmbtypesalaire, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbprofil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtprixbouteille)
-                            .addComponent(ddate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(btnmodifier, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(ddate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnmodifier, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,7 +376,7 @@ cmbtypesalaire.setSelectedIndex(-1);
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(525, Short.MAX_VALUE))
+                .addContainerGap(509, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

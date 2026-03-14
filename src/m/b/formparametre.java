@@ -42,6 +42,7 @@ public class formparametre extends javax.swing.JPanel {
 
         putilisateur.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         putilisateur.setForeground(new java.awt.Color(255, 255, 255));
+        putilisateur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user.png"))); // NOI18N
         putilisateur.setText("Utilsateur");
         putilisateur.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         putilisateur.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -52,6 +53,7 @@ public class formparametre extends javax.swing.JPanel {
 
         pmotdepasse.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         pmotdepasse.setForeground(new java.awt.Color(255, 255, 255));
+        pmotdepasse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/mdp.png"))); // NOI18N
         pmotdepasse.setText("Mot de passe");
         pmotdepasse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pmotdepasse.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -62,6 +64,7 @@ public class formparametre extends javax.swing.JPanel {
 
         pprofil.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         pprofil.setForeground(new java.awt.Color(255, 255, 255));
+        pprofil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/profil.png"))); // NOI18N
         pprofil.setText("Profil");
         pprofil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pprofil.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -78,6 +81,7 @@ public class formparametre extends javax.swing.JPanel {
 
         pnouveaufrigo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         pnouveaufrigo.setForeground(new java.awt.Color(255, 255, 255));
+        pnouveaufrigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/frigo.png"))); // NOI18N
         pnouveaufrigo.setText("Nouveau frigo");
         pnouveaufrigo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnouveaufrigo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,11 +100,9 @@ public class formparametre extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pprofil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pmotdepasse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(putilisateur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(pprofil, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(pnouveaufrigo, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -121,7 +123,7 @@ public class formparametre extends javax.swing.JPanel {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnouveaufrigo)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         dparametre.setBorder(null);

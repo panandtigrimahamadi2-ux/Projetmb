@@ -85,6 +85,7 @@ public class formprofil extends javax.swing.JPanel {
 
         btnnouveau.setBackground(new java.awt.Color(153, 0, 0));
         btnnouveau.setForeground(new java.awt.Color(255, 255, 255));
+        btnnouveau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/nouveau.png"))); // NOI18N
         btnnouveau.setText("Nouveau");
         btnnouveau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +94,7 @@ public class formprofil extends javax.swing.JPanel {
         });
 
         btnvalider.setBackground(new java.awt.Color(0, 153, 51));
+        btnvalider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/valider.png"))); // NOI18N
         btnvalider.setText("Valider");
         btnvalider.setEnabled(false);
         btnvalider.addActionListener(new java.awt.event.ActionListener() {
@@ -251,6 +253,7 @@ public class formprofil extends javax.swing.JPanel {
 
         btnmodifier.setBackground(new java.awt.Color(153, 153, 0));
         btnmodifier.setForeground(new java.awt.Color(255, 255, 255));
+        btnmodifier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/modi.png"))); // NOI18N
         btnmodifier.setText("Modifier");
         btnmodifier.setEnabled(false);
         btnmodifier.addActionListener(new java.awt.event.ActionListener() {
@@ -261,6 +264,7 @@ public class formprofil extends javax.swing.JPanel {
 
         btnsupprimer.setBackground(new java.awt.Color(153, 0, 0));
         btnsupprimer.setForeground(new java.awt.Color(255, 255, 255));
+        btnsupprimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/supprimer_24.png"))); // NOI18N
         btnsupprimer.setText("Supprimer");
         btnsupprimer.setEnabled(false);
         btnsupprimer.addActionListener(new java.awt.event.ActionListener() {
@@ -306,7 +310,7 @@ public class formprofil extends javax.swing.JPanel {
                 .addComponent(btnmodifier)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnsupprimer)
-                .addGap(56, 56, 56))
+                .addGap(55, 55, 55))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,9 +334,9 @@ public class formprofil extends javax.swing.JPanel {
                 .addGap(9, 9, 9)
                 .addComponent(chboisson_liste)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnsupprimer)
-                    .addComponent(btnmodifier))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnsupprimer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnmodifier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -377,7 +381,7 @@ public class formprofil extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,7 +395,7 @@ public class formprofil extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

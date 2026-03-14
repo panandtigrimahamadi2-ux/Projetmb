@@ -206,6 +206,7 @@ public class formconnexion extends javax.swing.JPanel {
             formmain.magent.setEnabled(vagent == 1);
             formmain.mstatistique.setEnabled(vstatistique == 1);
             formmain.mparamètre.setEnabled(vparametre == 1);
+//            formmain.mdeconnecter.setEnabled(true);
 
             formmain.dbureau.removeAll();
             formmain.dbureau.repaint();
